@@ -1,0 +1,8 @@
+.heroes {
+  cursor: pointer;
+
+  & li.selected {
+    background-color: #333;
+    color: white;
+  }
+}
