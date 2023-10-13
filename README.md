@@ -1,6 +1,7 @@
 # TohPemYtFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+This project is based on this [Angular tutorial](https://www.youtube.com/watch?v=qfUcxetl74M&list=PLqsayW8DhUmvtNlkDqYj99X73ts9FLK7j&index=2).
 
 ## Development server
 
