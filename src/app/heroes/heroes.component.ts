@@ -10,6 +10,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.scss'],
 })
 export class HeroesComponent implements OnInit {
+  protected columns = ['id', 'name'];
   protected heroes: Hero[] = [];
 
   private readonly destroyRef = inject(DestroyRef);
@@ -26,6 +27,7 @@ export class HeroesComponent implements OnInit {
       .subscribe({
         next: (heroes: Hero[]) => {
           this.heroes = heroes;
+          console.log('get heroes', heroes);
         },
       });
   }
