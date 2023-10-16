@@ -1,6 +1,17 @@
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
+
   <span data-flex="end"></span>
+
+  <button
+    aria-label="navigation to dashboard"
+    mat-icon-button
+    matTooltip="Dashboard"
+    routerLink="/dashboard"
+  >
+    <mat-icon>dashboard</mat-icon>
+  </button>
+
   <button
     aria-label="navigation to heroes list"
     mat-icon-button
@@ -11,7 +22,7 @@
   </button>
 </mat-toolbar>
 
-<div class="content">
+<div class="content" data-layout="column" data-layout-gap="12px">
   <router-outlet></router-outlet>
   <app-messages></app-messages>
 </div>

@@ -9,6 +9,9 @@ $includeResponsiveApi: true;
 @include fx.gap-attribute-selectors-from-list(32 48, px em, $includeResponsiveApi);
 @include fx.flex-size-attribute-selectors(5, 100, 5, $includeResponsiveApi);
 @include fx.flex-size-attribute-selectors-from-list(33 66, $includeResponsiveApi);
+@include fx.gap-attribute-selectors(1, 8, 1, px em, $includeResponsiveApi);
+@include fx.gap-attribute-selectors-from-list(16 32 48, px em, $includeResponsiveApi);
+@include fx.attribute-selectors(true);
 
 html, body {
   height: 100%;
@@ -17,4 +20,5 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
 }
