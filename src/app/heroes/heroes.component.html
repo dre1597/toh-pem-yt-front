@@ -1,0 +1,20 @@
+<h1>My Heroes</h1>
+
+<mat-table [dataSource]="heroes" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columns" />
+  <mat-row
+    *matRowDef="let row; columns: columns"
+    class="mat-row"
+    routerLink="/heroes/{{ row.id }}"
+  />
+</mat-table>

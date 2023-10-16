@@ -1,0 +1,17 @@
+<h1>Dashboard</h1>
+
+<div
+  class="mat-card"
+  data-layout="row"
+  data-layout-align="center center"
+  data-layout-gap="12px"
+  data-layout-wrap
+>
+  <mat-card
+    *ngFor="let hero of heroes"
+    class="pointer"
+    routerLink="/heroes/{{ hero.id }}"
+  >
+    <mat-card-content>{{ hero.name }}</mat-card-content>
+  </mat-card>
+</div>

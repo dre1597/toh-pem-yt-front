@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "css-fx-layout" as fx;
+
+$includeResponsiveApi: true;
+
+@include fx.attribute-selectors($includeResponsiveApi);
+@include fx.gap-attribute-selectors(1, 16, 1, px em, $includeResponsiveApi);
+@include fx.gap-attribute-selectors-from-list(32 48, px em, $includeResponsiveApi);
+@include fx.flex-size-attribute-selectors(5, 100, 5, $includeResponsiveApi);
+@include fx.flex-size-attribute-selectors-from-list(33 66, $includeResponsiveApi);
+@include fx.gap-attribute-selectors(1, 8, 1, px em, $includeResponsiveApi);
+@include fx.gap-attribute-selectors-from-list(16 32 48, px em, $includeResponsiveApi);
+@include fx.attribute-selectors(true);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+.pointer {
+  cursor: pointer;
+}
