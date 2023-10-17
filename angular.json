@@ -69,7 +69,8 @@
               "browserTarget": "toh-pem-yt-front:build:production"
             },
             "development": {
-              "browserTarget": "toh-pem-yt-front:build:development"
+              "browserTarget": "toh-pem-yt-front:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
