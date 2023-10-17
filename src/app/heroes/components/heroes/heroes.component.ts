@@ -1,8 +1,8 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Hero } from '../hero.type';
-import { HeroService } from '../hero.service';
+import { HeroService } from '../../../core/services/hero.service';
+import { Hero } from '../../../core/models/hero.model';
 
 @Component({
   selector: 'app-heroes',
@@ -27,7 +27,6 @@ export class HeroesComponent implements OnInit {
       .subscribe({
         next: (heroes: Hero[]) => {
           this.heroes = heroes;
-          console.log('get heroes', heroes);
         },
       });
   }

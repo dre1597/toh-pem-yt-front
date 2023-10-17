@@ -1,26 +1,4 @@
-<mat-toolbar color="primary">
-  <span>{{ title }}</span>
-
-  <span data-flex="end"></span>
-
-  <button
-    aria-label="navigation to dashboard"
-    mat-icon-button
-    matTooltip="Dashboard"
-    routerLink="/dashboard"
-  >
-    <mat-icon>dashboard</mat-icon>
-  </button>
-
-  <button
-    aria-label="navigation to heroes list"
-    mat-icon-button
-    matTooltip="Heroes"
-    routerLink="/heroes"
-  >
-    <mat-icon>sports_martial_arts</mat-icon>
-  </button>
-</mat-toolbar>
+<app-toolbar [menuItems]="menuItems" [title]="title"></app-toolbar>
 
 <div class="content" data-layout="column" data-layout-gap="12px">
   <router-outlet></router-outlet>
