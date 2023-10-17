@@ -27,7 +27,6 @@ export class HeroesComponent implements OnInit {
       .subscribe({
         next: (heroes: Hero[]) => {
           this.heroes = heroes;
-          console.log('get heroes', heroes);
         },
       });
   }
