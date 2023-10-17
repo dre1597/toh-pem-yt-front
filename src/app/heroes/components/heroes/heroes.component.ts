@@ -1,8 +1,8 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Hero } from '../core/models/hero.model';
-import { HeroService } from '../core/services/hero.service';
+import { HeroService } from '../../../core/services/hero.service';
+import { Hero } from '../../../core/models/hero.model';
 
 @Component({
   selector: 'app-heroes',

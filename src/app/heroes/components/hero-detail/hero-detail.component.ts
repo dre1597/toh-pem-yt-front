@@ -3,8 +3,8 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Hero } from '../core/models/hero.model';
-import { HeroService } from '../core/services/hero.service';
+import { Hero } from '../../../core/models/hero.model';
+import { HeroService } from '../../../core/services/hero.service';
 
 @Component({
   selector: 'app-hero-detail',
