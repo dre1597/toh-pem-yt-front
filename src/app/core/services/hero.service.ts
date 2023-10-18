@@ -1,15 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { Hero } from '../models/hero.model';
 
+import { Hero } from '../models/hero.model';
 import { MessagesService } from './messages.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroService {
-  private heroesUrl = '/api/heroes';
+  private heroesUrl = `${environment.apiUrL}/api/heroes`;
 
   private readonly messageService = inject(MessagesService);
   private readonly httpClient = inject(HttpClient);
