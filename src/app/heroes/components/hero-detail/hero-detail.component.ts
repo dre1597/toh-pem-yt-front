@@ -25,7 +25,7 @@ export class HeroDetailComponent implements OnInit {
   protected getHero(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.heroService
-      .getHero(id)
+      .getOne(id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (hero: Hero | undefined) => {

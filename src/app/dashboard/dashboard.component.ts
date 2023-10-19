@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   protected getHeroes(): void {
     this.heroService
-      .getHeroes()
+      .getAll()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((heroes: Hero[]) => {
         this.heroes = heroes.slice(0, 5);

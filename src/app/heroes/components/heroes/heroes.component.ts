@@ -22,7 +22,7 @@ export class HeroesComponent implements OnInit {
 
   private getHeroes(): void {
     this.heroService
-      .getHeroes()
+      .getAll()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (heroes: Hero[]) => {

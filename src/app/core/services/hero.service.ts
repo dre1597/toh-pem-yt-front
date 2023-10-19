@@ -15,13 +15,13 @@ export class HeroService {
   private readonly messageService = inject(MessagesService);
   private readonly httpClient = inject(HttpClient);
 
-  public getHeroes(): Observable<Hero[]> {
+  public getAll(): Observable<Hero[]> {
     return this.httpClient
       .get<Hero[]>(this.heroesUrl)
       .pipe(tap(() => this.log('fetched heroes')));
   }
 
-  public getHero(id: number): Observable<Hero | undefined> {
+  public getOne(id: number): Observable<Hero | undefined> {
     return this.httpClient
       .get<Hero>(`${this.heroesUrl}/${id}`)
       .pipe(tap(() => this.log(`fetched hero id=${id}`)));
