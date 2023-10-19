@@ -9,17 +9,21 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
+const COMPONENTS = [
+  MessagesComponent,
+  ToolbarComponent,
+  NotFoundPageComponent,
+  LoadingComponent,
+  ConfirmationDialogComponent,
+];
+
 @NgModule({
-  declarations: [
-    MessagesComponent,
-    ToolbarComponent,
-    NotFoundPageComponent,
-    LoadingComponent,
-  ],
+  declarations: COMPONENTS,
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -33,7 +37,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     },
   ],
   imports: [CommonModule, MaterialModule, RouterLink],
-  exports: [MessagesComponent, ToolbarComponent, LoadingComponent],
+  exports: COMPONENTS,
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule?: CoreModule) {

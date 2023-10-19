@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MODULES = [
   MatToolbarModule,
@@ -22,10 +23,11 @@ const MODULES = [
   MatInputModule,
   MatTableModule,
   MatProgressSpinnerModule,
+  MatDialogModule,
 ];
 
 @NgModule({
-  imports: [...MODULES],
-  exports: [...MODULES],
+  imports: MODULES,
+  exports: MODULES,
 })
 export class MaterialModule {}

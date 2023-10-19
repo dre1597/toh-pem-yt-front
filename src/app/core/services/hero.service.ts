@@ -39,6 +39,12 @@ export class HeroService {
       .pipe(tap(() => this.log(`updated hero id=${hero.id}`)));
   }
 
+  public delete(id: number): Observable<void> {
+    return this.httpClient
+      .delete<void>(`${this.heroesUrl}/${id}`)
+      .pipe(tap(() => this.log(`deleted hero id=${id}`)));
+  }
+
   private log(message: string): void {
     this.messageService.add(`HeroService: ${message}`);
   }
