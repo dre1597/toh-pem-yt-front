@@ -15,16 +15,28 @@ export class HeroService {
   private readonly messageService = inject(MessagesService);
   private readonly httpClient = inject(HttpClient);
 
-  public getHeroes(): Observable<Hero[]> {
+  public getAll(): Observable<Hero[]> {
     return this.httpClient
       .get<Hero[]>(this.heroesUrl)
       .pipe(tap(() => this.log('fetched heroes')));
   }
 
-  public getHero(id: number): Observable<Hero | undefined> {
+  public getOne(id: number): Observable<Hero | undefined> {
     return this.httpClient
       .get<Hero>(`${this.heroesUrl}/${id}`)
       .pipe(tap(() => this.log(`fetched hero id=${id}`)));
+  }
+
+  public add(hero: Hero): Observable<Hero> {
+    return this.httpClient
+      .post<Hero>(this.heroesUrl, hero)
+      .pipe(tap(() => this.log(`added hero w/ id=${hero.id}`)));
+  }
+
+  public update(hero: Hero): Observable<Hero> {
+    return this.httpClient
+      .put<Hero>(`${this.heroesUrl}/${hero.id}`, hero)
+      .pipe(tap(() => this.log(`updated hero id=${hero.id}`)));
   }
 
   private log(message: string): void {
