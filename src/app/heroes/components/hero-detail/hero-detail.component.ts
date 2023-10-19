@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -12,13 +13,24 @@ import { HeroService } from '../../../core/services/hero.service';
   styleUrls: ['./hero-detail.component.scss'],
 })
 export class HeroDetailComponent implements OnInit {
-  protected hero: Hero = this.initializeEmptyHero();
   protected isEditing = false;
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly heroService = inject(HeroService);
   private readonly location = inject(Location);
   private readonly route = inject(ActivatedRoute);
+  private readonly formBuilder = inject(FormBuilder);
+
+  protected form = this.formBuilder.group({
+    id: new FormControl<number | undefined>({
+      value: undefined,
+      disabled: true,
+    }),
+    name: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+  });
 
   public ngOnInit(): void {
     this.getHero();
@@ -27,52 +39,50 @@ export class HeroDetailComponent implements OnInit {
   protected getHero(): void {
     const paramId = this.route.snapshot.paramMap.get('id');
 
-    if (paramId === 'new') {
-      this.isEditing = false;
-      this.hero = this.initializeEmptyHero();
-      return;
-    }
+    if (paramId !== 'new') {
+      this.isEditing = true;
+      const id = Number(paramId);
 
-    this.isEditing = true;
-    const id = Number(paramId);
-    this.heroService
-      .getOne(id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (hero: Hero | undefined) => {
-          if (hero) {
-            this.hero = hero;
-          } else {
-            this.hero = this.initializeEmptyHero();
-          }
-        },
-      });
+      this.heroService
+        .getOne(id)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (hero: Hero | undefined) => {
+            if (hero) {
+              this.form.controls['id'].setValue(hero.id);
+              this.form.controls['name'].setValue(hero.name);
+            }
+          },
+        });
+    }
   }
 
   protected goBack(): void {
     this.location.back();
   }
 
-  protected isFormValid(): boolean {
-    return !!this.hero?.name?.trim();
-  }
-
   protected save(): void {
-    if (!this.isFormValid()) {
+    const { valid, value } = this.form;
+
+    if (!valid || !value.name) {
       return;
     }
 
     if (this.isEditing) {
-      this.update();
+      if (!this.form.controls['id'].value) {
+        return;
+      }
+
+      this.update(this.form.controls['id'].value, value.name);
       return;
     }
 
-    this.create();
+    this.create(value.name);
   }
 
-  private create(): void {
+  private create(name: string): void {
     this.heroService
-      .add(this.hero)
+      .add({ name } as Hero)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
@@ -81,18 +91,14 @@ export class HeroDetailComponent implements OnInit {
       });
   }
 
-  private update(): void {
+  private update(id: number, name: string): void {
     this.heroService
-      .update(this.hero)
+      .update({ id, name })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.goBack();
         },
       });
-  }
-
-  private initializeEmptyHero(): Hero {
-    return { name: '' } as Hero;
   }
 }
