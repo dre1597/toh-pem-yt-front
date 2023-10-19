@@ -11,6 +11,7 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { LoadingComponent } from './components/loading/loading.component';
 
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,11 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true,
     },
   ],
