@@ -27,6 +27,12 @@ export class HeroService {
       .pipe(tap(() => this.log(`fetched hero id=${id}`)));
   }
 
+  public add(hero: Hero): Observable<Hero> {
+    return this.httpClient
+      .post<Hero>(this.heroesUrl, hero)
+      .pipe(tap(() => this.log(`added hero w/ id=${hero.id}`)));
+  }
+
   public update(hero: Hero): Observable<Hero> {
     return this.httpClient
       .put<Hero>(`${this.heroesUrl}/${hero.id}`, hero)
