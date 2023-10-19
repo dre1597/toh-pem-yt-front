@@ -9,6 +9,7 @@ import { HeroService } from '../../../core/services/hero.service';
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.scss'],
 })
 export class HeroDetailComponent implements OnInit {
   protected hero?: Hero;
@@ -36,5 +37,22 @@ export class HeroDetailComponent implements OnInit {
 
   protected goBack(): void {
     this.location.back();
+  }
+
+  protected isFormValid(): boolean {
+    return !!this.hero?.name?.trim();
+  }
+
+  protected save(): void {
+    if (this.hero) {
+      this.heroService
+        .update(this.hero)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: () => {
+            this.goBack();
+          },
+        });
+    }
   }
 }

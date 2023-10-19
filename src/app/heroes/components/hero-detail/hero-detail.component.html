@@ -20,9 +20,15 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="goBack()" color="primary" mat-raised-button>
-        Go Back
+      <button
+        (click)="save()"
+        [disabled]="!isFormValid()"
+        color="primary"
+        mat-raised-button
+      >
+        Save
       </button>
+      <button (click)="goBack()" mat-raised-button>Go Back</button>
     </mat-card-actions>
   </mat-card>
 </div>
