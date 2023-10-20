@@ -5,7 +5,7 @@ import { DialogData } from '../../models/dialog-data.model';
 @Component({
   selector: 'app-confirmation-dialog',
   template: ` <mat-dialog-content>
-      <p class="mat-body-1">{{ data.message }}</p>
+      <p>{{ data.message }}</p>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">

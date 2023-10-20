@@ -23,8 +23,10 @@ export class HeroesComponent implements OnInit {
     this.getAll();
   }
 
-  protected delete(hero: Hero, event: MouseEvent): void {
-    event.stopPropagation();
+  protected delete(hero: Hero, event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
 
     const dialogData: DialogData = {
       cancelText: 'Cancel',

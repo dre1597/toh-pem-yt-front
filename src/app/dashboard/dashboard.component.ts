@@ -1,4 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { HeroService } from '../core/services/hero.service';
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly heroService = inject(HeroService);
+  private readonly router = inject(Router);
 
   public ngOnInit(): void {
     this.getHeroes();
@@ -26,5 +28,9 @@ export class DashboardComponent implements OnInit {
       .subscribe((heroes: Hero[]) => {
         this.heroes = heroes.slice(0, 5);
       });
+  }
+
+  protected onHeroSelected(hero: Hero): void {
+    this.router.navigate(['/heroes', hero.id]);
   }
 }

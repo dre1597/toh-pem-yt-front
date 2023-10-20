@@ -4,6 +4,8 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<app-hero-search (heroSelected)="delete($event)" label="Hero to delete" />
+
 <mat-table [dataSource]="heroes" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
