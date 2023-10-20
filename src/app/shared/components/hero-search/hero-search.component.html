@@ -1,0 +1,29 @@
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    #heroInput
+    (input)="search(heroInput.value)"
+    [matAutocomplete]="autoComplete"
+    matInput
+    placeholder="Hero name"
+    type="text"
+  />
+
+  <button
+    (click)="heroInput.value = ''"
+    *ngIf="heroInput.value"
+    mat-icon-button
+    matSuffix
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <mat-autocomplete
+    #autoComplete="matAutocomplete"
+    (optionSelected)="onSelected($event); heroInput.value = ''"
+  >
+    <mat-option *ngFor="let hero of heroes$ | async" [value]="hero">
+      {{ hero.name }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

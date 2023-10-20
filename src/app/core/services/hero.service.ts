@@ -15,10 +15,10 @@ export class HeroService {
   private readonly messageService = inject(MessagesService);
   private readonly httpClient = inject(HttpClient);
 
-  public getAll(): Observable<Hero[]> {
+  public getAll(term?: string): Observable<Hero[]> {
     return this.httpClient
-      .get<Hero[]>(this.heroesUrl)
-      .pipe(tap(() => this.log('fetched heroes')));
+      .get<Hero[]>(`${this.heroesUrl}${term ? `?name=${term}` : ''}`)
+      .pipe(tap((heroes) => this.log(`fetched ${heroes.length} heroes`)));
   }
 
   public getOne(id: number): Observable<Hero | undefined> {
@@ -37,6 +37,12 @@ export class HeroService {
     return this.httpClient
       .put<Hero>(`${this.heroesUrl}/${hero.id}`, hero)
       .pipe(tap(() => this.log(`updated hero id=${hero.id}`)));
+  }
+
+  public delete(id: number): Observable<void> {
+    return this.httpClient
+      .delete<void>(`${this.heroesUrl}/${id}`)
+      .pipe(tap(() => this.log(`deleted hero id=${id}`)));
   }
 
   private log(message: string): void {

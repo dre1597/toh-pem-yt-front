@@ -4,6 +4,8 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<app-hero-search (heroSelected)="delete($event)" label="Hero to delete" />
+
 <mat-table [dataSource]="heroes" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
@@ -13,6 +15,20 @@
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button
+        (click)="delete(row, $event)"
+        color="primary"
+        mat-icon-button
+        matTooltip="Delete this item"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="columns" />

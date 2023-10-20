@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+
 import { MenuItem } from './core/models/menu-item.model';
+import { AuthService } from './auth/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,7 @@ import { MenuItem } from './core/models/menu-item.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  protected isLoggedIn$: Observable<boolean>;
   protected title = 'Tour of Heroes';
   protected menuItems: MenuItem[] = [
     {
@@ -22,4 +26,13 @@ export class AppComponent {
       ariaLabel: 'Navigate to heroes list',
     },
   ];
+  private readonly authService = inject(AuthService);
+
+  constructor() {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+  }
+
+  protected onLogout(): void {
+    this.authService.logout();
+  }
 }

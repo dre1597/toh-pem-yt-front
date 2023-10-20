@@ -1,32 +1,44 @@
 <h2>{{ isEditing ? 'Edit' : 'Add' }} Hero</h2>
-<mat-card>
-  <mat-card-content>
-    <div data-layout="column">
-      <mat-form-field *ngIf="isEditing" appearance="fill">
-        <mat-label>Id</mat-label>
-        <input disabled matInput value="{{ hero.id }}" />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Hero Name</mat-label>
-        <input
-          [(ngModel)]="hero.name"
-          id="name"
-          matInput
-          placeholder="Name"
-          type="text"
-        />
-      </mat-form-field>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button
-      (click)="save()"
-      [disabled]="!isFormValid()"
-      color="primary"
-      mat-raised-button
-    >
-      Save
-    </button>
-    <button (click)="goBack()" mat-raised-button>Go Back</button>
-  </mat-card-actions>
-</mat-card>
+
+<form [formGroup]="form" novalidate>
+  <mat-card>
+    <mat-card-content>
+      <div data-layout="column">
+        <mat-form-field *ngIf="isEditing" appearance="fill">
+          <mat-label>Id</mat-label>
+          <input formControlName="id" matInput name="id" type="text" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Hero Name</mat-label>
+          <input
+            formControlName="name"
+            id="name"
+            matInput
+            name="name"
+            placeholder="Name"
+            type="text"
+          />
+
+          <mat-error *ngIf="form.get('name')?.hasError('required')">
+            Name is required
+          </mat-error>
+
+          <mat-error *ngIf="form.get('name')?.hasError('minlength')">
+            Name must be at least 3 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="save()"
+        [disabled]="!form.valid"
+        color="primary"
+        mat-raised-button
+      >
+        Save
+      </button>
+      <button (click)="goBack()" mat-raised-button>Go Back</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
