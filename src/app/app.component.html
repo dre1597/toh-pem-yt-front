@@ -1,4 +1,9 @@
-<app-toolbar [menuItems]="menuItems" [title]="title"></app-toolbar>
+<app-toolbar
+  (logout)="onLogout()"
+  [isLoggedIn]="isLoggedIn$ | async"
+  [menuItems]="menuItems"
+  [title]="title"
+></app-toolbar>
 
 <div class="content" data-layout="column" data-layout-gap="12px">
   <app-loading></app-loading>

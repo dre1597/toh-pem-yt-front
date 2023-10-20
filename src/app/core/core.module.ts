@@ -13,6 +13,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const COMPONENTS = [
   MessagesComponent,
@@ -33,6 +34,11 @@ const COMPONENTS = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
       multi: true,
     },
   ],
